@@ -14,7 +14,7 @@
         android:background="#DD272525"
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:textSize="27sp" />
 
     <Button
         android:id="@+id/button"

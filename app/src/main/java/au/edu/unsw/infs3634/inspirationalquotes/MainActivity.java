@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -31,26 +29,24 @@ public class MainActivity extends AppCompatActivity {
 
         quote = findViewById(R.id.quote);
         button = findViewById(R.id.button);
+
+        //Calling setQuote() method when user clicks on the button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 setQuote();
             }
         });
-
-        setQuote();
     }
 
     public void setQuote() {
 
-        //create Retrofit instance & parse the retrieved Json using the Gson deserialiser
+        //Creating Retrofit instance, parsing the retrieved Json and calling the object
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.chucknorris.io/jokes/").addConverterFactory(GsonConverterFactory.create()).build();
-
-        //get service & call object for the request
         QuoteService service = retrofit.create(QuoteService.class);
         Call<QuoteResponse> quoteCall = service.getQuote("dev");
 
-        //execute network request
+        //Executing the network request
         quoteCall.enqueue(new Callback<QuoteResponse>() {
             @Override
             public void onResponse(Call<QuoteResponse> call, Response<QuoteResponse> response) {
@@ -64,7 +60,5 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onFailure: FAILURE");
             }
         });
-
     }
-
 }
